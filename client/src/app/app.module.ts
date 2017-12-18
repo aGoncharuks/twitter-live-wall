@@ -5,14 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ConfigService } from './services/config.service';
-import { TweetService } from './services/tweet/tweet.service';
+import { TweetService } from './services/tweet.service';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 
 /**
  * Socket IO config
  */
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(socketConfig),
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule

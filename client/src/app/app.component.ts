@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TweetService } from './services/tweet/tweet.service';
+import { TweetService } from './services/tweet.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent {
 
   /**
    * Search tweets by search term
-   * Once tweets found - initiate subscription to new tweets
+   * Once tweets found - create subscription to new tweets if not yet
    * @param search
    */
   public searchTweets(search: string): void {

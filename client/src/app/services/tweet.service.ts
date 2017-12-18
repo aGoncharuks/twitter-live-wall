@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ng-socket-io';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { ConfigService } from '../config.service';
+import { ConfigService } from './config.service';
 
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TweetService {
@@ -18,7 +17,7 @@ export class TweetService {
   /**
    * Get tweets
    * @param search
-   * @returns {Observable<Object>}
+   * @returns {Observable<Tweet[]>}
    */
   public getTweets(search: string): Observable<any> {
     return this.http.get(`${this.configService.serverRoot}/search/tweets/${search}`);
@@ -26,9 +25,9 @@ export class TweetService {
 
   /**
    * Listen to new tweets
-   * @returns {Observable<any>}
+   * @returns {Observable<Tweet>}
    */
-  public listenToTweets() {
+  public listenToTweets(): Observable<Tweet> {
     return this.socket
       .fromEvent<any>('tweet');
   }

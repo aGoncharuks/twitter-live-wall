@@ -10,12 +10,11 @@
 </div>
 
 <mat-list dense class="tweet-list">
-  <h3 *ngIf="tweets.length" matSubheader>Matching tweets</h3>
+  <h3 *ngIf="tweets.length" matSubheader>Last search matching tweets</h3>
   <div *ngFor="let tweet of tweets">
     <mat-list-item class="tweet-list-item">
       <a target="_blank" rel="noopener" [href]="'https://twitter.com/' + tweet.username"><img class="tweet-avatar" *ngIf="tweet.avatar" matListAvatar src={{tweet.avatar}}></a>
-
-      <div>{{tweet.text}}</div>
+      <div class="tweet-text">{{tweet.text}}</div>
     </mat-list-item>
     <mat-divider></mat-divider>
   </div>
