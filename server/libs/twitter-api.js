@@ -73,7 +73,7 @@ function changeTweetStream(search) {
 /**
  * Listener for status stream data event
  * Tweet is not the only event type that can arrive, for more info see: https://www.npmjs.com/package/twitter
- * In order get tweets only stream data is filtered
+ * In order to get tweets only stream data is filtered
  * @param event
  */
 function tweetStreamDataListener(event) {
@@ -88,9 +88,8 @@ function tweetStreamDataListener(event) {
 }
 
 /**
- * Listen to errors but do not throw error further
- * Application is being rate limited for making too many requests (non-premium app), so 420 Error will be caught here on a regular basis
- * For more info see: https://developer.twitter.com/en/docs/basics/rate-limiting.html
+ * 420 Error(rate limiting) will be in case of several consequent search requests, server should be restarted then
+ * See comment fo changeTweetStream f-n for more details)
  */
 function tweetStreamErrorListener(e) {
 	if (e.message === 'Status Code: 420') {
