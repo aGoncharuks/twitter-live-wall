@@ -1,16 +1,17 @@
 const Koa = require('koa');
-const app = new Koa();
 const config = require('config');
 const path = require('path');
 const fs = require('fs');
+const twitterApi = require('./libs/twitter-api');
+
+const app = new Koa();
 
 /**
- * Add middlware
+ * Add middleware
  */
-const handlers = fs.readdirSync(path.join(__dirname, 'handlers')).sort();
-handlers.forEach(handler => {
-  const h = require('./handlers/' + handler);
-  h.init(app);
+const middlewares = fs.readdirSync(path.join(__dirname, 'middlewares')).sort();
+middlewares.forEach(function(middleware) {
+	app.use(require('./middlewares/' + middleware));
 });
 
 /**
@@ -22,12 +23,32 @@ const router = new Router();
 /**
  * Define routes
  */
-router.get('/', async function(ctx) {
-	ctx.body = 'Server works';
+router.get('/search/tweets/:search', async function(ctx) {
+
+	if(!ctx.params.search) {
+		ctx.response.body = 'Please provide search criteria for tweets';
+		return;
+	}
+
+	/**
+	 * Get tweets by search term
+	 */
+	let tweets = await twitterApi.searchTweets(ctx.params.search);
+	twitterApi.changeTweetStream(ctx.params.search);
+	ctx.response.body = tweets;
 });
 
 /**
- * Add routes and start listening to port
+ * Add routes
  */
 app.use(router.routes());
-app.listen(config.get('port'));
+
+/**
+ * Create server
+ */
+const server = app.listen(config.get('port'));
+
+/**
+ * Create socket connection
+ */
+twitterApi.createTweetSocket(server);

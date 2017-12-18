@@ -1,0 +1,59 @@
+.search-wrap {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 20px 0;
+
+  .search-input-field {
+    width: 100%;
+    margin-right: 10px;
+
+    input {
+      color: #fff;
+    }
+  }
+
+  .search-button {
+    margin-top: 10px;
+  }
+
+  .search-button-icon {
+    color: #fff;
+  }
+}
+
+.tweet-list {
+  margin: 0 auto;
+
+  .tweet-list-item {
+    margin: 10px auto;
+  }
+
+  .tweet-avatar {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1023px) {
+
+  .search-wrap {
+    margin: 50px 0;
+
+    .search-input-field {
+      width: 40%;
+    }
+  }
+
+
+  .tweet-list {
+    width: 80%;
+    padding: 10px 20px;
+
+    .tweet-list-item {
+      margin: 5px auto;
+    }
+  }
+}
