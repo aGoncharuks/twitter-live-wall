@@ -6,9 +6,9 @@ Project consists of client part (Angular) and server part(Node.js) that use both
 
 ## Running application
 
-Navigate to /server directory and run `npm start` to launch server
+Navigate to /server directory and run `npm install` and then `npm start` to launch server
 
-Navigate to /client directory and run `ng serve` to launch client
+Navigate to /client directory and run `npm install` and then `ng serve` to launch client
 
 Navigate to `http://localhost:4200/` to use app
 
