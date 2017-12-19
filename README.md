@@ -1,6 +1,9 @@
 # twitter-live-wall
 Live wall showing latest tweets that match search criteria
 
+## Design
+Project consists of client part (Angular) and server part(Node.js) that use both http connection and web sockets for communication. Code is located in /client and /server project directories accordingly. Project uses Karma + Jasmine for unit tests. Find installation and running tests guides below.
+
 
 ## Running application
 
