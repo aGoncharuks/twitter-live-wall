@@ -70,7 +70,13 @@ export class AppComponent implements OnDestroy {
       });
   }
 
+  /**
+   * Unsubscribe on destroy
+   * Check if subscription exists first to work with tests as well
+   */
   ngOnDestroy() {
-    this._tweetSubscription.unsubscribe();
+    if(this._tweetSubscription) {
+      this._tweetSubscription.unsubscribe();
+    }
   }
 }
