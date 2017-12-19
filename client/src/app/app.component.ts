@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TweetService } from './services/tweet.service';
 import { Subscription } from 'rxjs/Subscription';
 import { MatSnackBar } from '@angular/material';
@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   private _tweetSubscription: Subscription;
   public tweets: Tweet[] = [];
@@ -24,10 +24,16 @@ export class AppComponent {
    * @param search
    */
   public searchTweets(search: string): void {
+    if (!search) {
+      this.snackBar.open('Please enter you search criteria!', 'Got it', {
+        duration: 5000
+      });
+      return;
+    }
     this.tweetService.getTweets(search)
       .subscribe((tweets: Tweet[]) => {
         if (!tweets || !tweets.length ) {
-          this.snackBar.open('Sorry, no tweets found! Please try changing search term!', 'Got it', {
+          this.snackBar.open('Sorry, no tweets found! Please try changing search criteria!', 'Got it', {
             duration: 10000
           });
           return;
@@ -38,6 +44,11 @@ export class AppComponent {
         if (!this._tweetSubscription) {
           this._subscribeToTweets();
         }
+      },
+      (error) => {
+        this.snackBar.open('Error on getting tweets! Please try again!', 'Got it', {
+          duration: 5000
+        });
       });
   }
 
@@ -51,6 +62,15 @@ export class AppComponent {
       .subscribe((tweet: Tweet) => {
         this.tweets.pop();
         this.tweets.unshift(tweet);
+      },
+      (error) => {
+        this.snackBar.open('Error on subscribing to tweets! Please try again!', 'Got it', {
+          duration: 5000
+        });
       });
+  }
+
+  ngOnDestroy() {
+    this._tweetSubscription.unsubscribe();
   }
 }
