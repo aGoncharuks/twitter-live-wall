@@ -83,6 +83,14 @@ describe('AppComponent', () => {
     expect(component.tweets).toEqual(tweetsMock);
   }));
 
+  it('Should show nothing if no tweets found', async(() => {
+    spyOn(tweetService, 'getTweets').and.returnValue(Observable.of([]));
+    component.searchTweets('string');
+    fixture.detectChanges();
+    const viewTweets = view.querySelectorAll('.tweet-list-item');
+    expect(viewTweets.length).toBe(0);
+  }));
+
   it('Should display found tweets on the screen', async(() => {
     spyOn(tweetService, 'getTweets').and.returnValue(tweetsObservableMock);
     component.searchTweets('string');

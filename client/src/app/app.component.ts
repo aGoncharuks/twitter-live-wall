@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TweetService } from './services/tweet.service';
 import { Subscription } from 'rxjs/Subscription';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent {
   public tweets: Tweet[] = [];
 
   constructor(
-    private tweetService: TweetService
+    private tweetService: TweetService,
+    private snackBar: MatSnackBar
   ) {}
 
   /**
@@ -24,6 +26,13 @@ export class AppComponent {
   public searchTweets(search: string): void {
     this.tweetService.getTweets(search)
       .subscribe((tweets: Tweet[]) => {
+        if (!tweets || !tweets.length ) {
+          this.snackBar.open('Sorry, no tweets found! Please try changing search term!', 'Got it', {
+            duration: 10000
+          });
+          return;
+        }
+        this.snackBar.dismiss();
         this.tweets = tweets;
 
         if (!this._tweetSubscription) {
