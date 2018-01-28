@@ -1,9 +1,9 @@
 module.exports = {
 	port: 3000,
 	twitter: {
-		consumer_key: 'POSzwbwTYqc6IUFBEcf1KFf6f',
-		consumer_secret: 'rHyu46B1MKF7eHYr28H1ZKhy6ad6xvNlFruOdQoHYhighiTqHm',
-		access_token_key: '942111443096408067-xNhuvHKF4TimsBlKplCjBzQ34hxK7an',
-		access_token_secret: 'qdMYEdm4dYJtmbXZYvdx9YrNB1GCCvUN9y0ixaqz6A0TE'
+		consumer_key: 'YOUR_TWITTER_APP_CONSUMER_KEY',
+		consumer_secret: 'YOUR_TWITTER_APP_SECRET',
+		access_token_key: 'YOUR_TWITTER_APP_USER_TOKEN_KEY',
+		access_token_secret: 'YOUR_TWITTER_APP_USER_TOKEN_SECRET'
 	}
 };
